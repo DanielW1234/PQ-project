@@ -2,8 +2,8 @@
 using namespace std;
 
 int main() {
-    int a = 10;
-    int b = 20;
+    int a = 100;
+    int b = 200;
     int c = a + b;
     cout << "c = " << c << endl;
     return 0;
