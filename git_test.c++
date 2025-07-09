@@ -5,11 +5,15 @@ int main() {
     int a = 100;
     int b = 200;
     int c = a + b;
-    cout << "c = " << c << endl;
-    
+    cout << "c = " << c << endl;  
+
     // 添加乘法功能
     int e = a * b;
     cout << "e = " << e << endl;
+
+    // 添加减法功能
+    int d = b - a;
+    cout << "d = " << d << endl;
     
     return 0;
 }
