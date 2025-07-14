@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PopQuiz - 智能课堂互动系统</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+  <div id="app">
+    <pop-quiz></pop-quiz>
+  </div>
+
+  <script type="module">
+    const { createApp, ref, reactive, onMounted } = Vue;
+    
+    const PopQuiz = {
+      template: `
+        <div class="container">
+          <!-- 顶部导航栏 -->
+          <header>
+            <div class="logo">
+              <i class="fas fa-bolt"></i>
+              <span>PopQuiz</span>
+            </div>
+            
+            <div class="nav-main">
+              <button 
+                v-for="(nav, index) in navItems" 
+                :key="index"
+                class="nav-btn" 
+                :class="{ active: activeNav === nav }"
+                @click="switchNav(nav)"
+              >
+                {{ nav }}
+              </button>
+            </div>
+            
+            <div class="role-selector">
+              <button 
+                v-for="(role, index) in roles" 
+                :key="index"
+                class="role-btn" 
+                :class="{ active: activeRole === role }"
+                @click="switchRole(role)"
+              >
+                {{ role }}
+              </button>
+            </div>
+          </header>
+          
+          <!-- 主内容区 -->
+          <main>
+            <section class="hero">
+              <h1>让课堂互动更智能、更高效</h1>
+              <p>PopQuiz 利用人工智能技术，实时生成课堂测验，帮助教师了解学生掌握程度，提升课堂互动质量</p>
+              
+              <div class="cta-buttons">
+                <button class="btn btn-primary">
+                  <i class="fas fa-rocket"></i> 开始新课堂
+                </button>
+                <button class="btn btn-outline">
+                  <i class="fas fa-book"></i> 查看使用教程
+                </button>
+              </div>
+            </section>
+            
+            <section class="upload-section">
+              <div class="section-header">
+                <h2>上传演讲内容</h2>
+                <p>支持文本、PPT、PDF格式文件，系统将自动生成测验题目</p>
+              </div>
+              
+              <div 
+                class="upload-area"
+                :class="{ 'dragover': isDragover }"
+                @dragover.prevent="onDragOver"
+                @dragleave.prevent="onDragLeave"
+                @drop.prevent="onDrop"
+                @click="triggerFileInput"
+              >
+                <div class="upload-icon">
+                  <i :class="uploadStatus.icon" :style="{ color: uploadStatus.iconColor }"></i>
+                </div>
+                <div class="upload-text" :style="{ color: uploadStatus.textColor }">
+                  {{ uploadStatus.text }}
+                </div>
+                <div class="upload-hint" :style="{ color: uploadStatus.hintColor }">
+                  {{ uploadStatus.hint }}
+                </div>
+                
+                <button class="btn btn-primary" @click.stop="triggerFileInput">
+                  <i class="fas fa-folder-open"></i> 选择文件
+                </button>
+                
+                <input 
+                  type="file" 
+                  ref="fileInput" 
+                  style="display:none" 
+                  @change="onFileSelected"
+                >
+                
+                <div class="file-types">
+                  <div v-for="(type, index) in fileTypes" :key="index" class="file-type">
+                    <i :class="type.icon"></i>
+                    <span>{{ type.name }}</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </main>
+          
+          <!-- 页脚 -->
+          <footer>
+            <div class="footer-links">
+              <a href="#">关于我们</a>
+              <a href="#">隐私政策</a>
+              <a href="#">使用条款</a>
+              <a href="#">帮助中心</a>
+              <a href="#">联系我们</a>
+            </div>
+            <p>© 2025 PopQuiz 智能课堂互动系统 | 让知识传递更高效</p>
+          </footer>
+        </div>
+      `,
+      setup() {
+        // 导航相关状态
+        const navItems = ref(['仪表盘', '内容管理', '答题统计', '讨论区', '徽章成就', '设置']);
+        const activeNav = ref('仪表盘');
+        
+        // 角色选择状态
+        const roles = ref(['组织者', '演讲者', '听众']);
+        const activeRole = ref('组织者');
+        
+        // 文件上传相关状态
+        const isDragover = ref(false);
+        const fileInput = ref(null);
+        const uploadStatus = reactive({
+          icon: 'fas fa-cloud-upload-alt',
+          iconColor: '#4361ee',
+          text: '拖放文件到此处或点击上传',
+          textColor: '#212529',
+          hint: '最大文件大小：20MB',
+          hintColor: '#6c757d'
+        });
+        
+        const fileTypes = ref([
+          { icon: 'fas fa-file-alt', name: '文本' },
+          { icon: 'fas fa-file-powerpoint', name: 'PPT' },
+          { icon: 'fas fa-file-pdf', name: 'PDF' }
+        ]);
+        
+        // 方法
+        const switchRole = (role) => {
+          activeRole.value = role;
+          console.log(`切换到角色: ${role}`);
+        };
+        
+        const switchNav = (nav) => {
+          activeNav.value = nav;
+        };
+        
+        const onDragOver = () => {
+          isDragover.value = true;
+        };
+        
+        const onDragLeave = () => {
+          isDragover.value = false;
+        };
+        
+        const onDrop = (e) => {
+          isDragover.value = false;
+          const files = e.dataTransfer.files;
+          if (files.length) {
+            handleFiles(files);
+          }
+        };
+        
+        const triggerFileInput = () => {
+          fileInput.value.click();
+        };
+        
+        const onFileSelected = (e) => {
+          const files = e.target.files;
+          if (files.length) {
+            handleFiles(files);
+          }
+        };
+        
+        const handleFiles = (files) => {
+          console.log('上传文件:', files);
+          
+          // 更新上传状态
+          uploadStatus.icon = 'fas fa-check-circle';
+          uploadStatus.iconColor = '#4caf50';
+          uploadStatus.text = `已上传 ${files[0].name}`;
+          uploadStatus.textColor = '#4caf50';
+          uploadStatus.hint = '文件已成功上传，系统正在处理内容...';
+          uploadStatus.hintColor = '#4caf50';
+          
+          // 处理文件逻辑（例如上传到服务器）
+          // 模拟处理过程
+          setTimeout(() => {
+            uploadStatus.hint = '处理完成！已生成测验题目';
+          }, 2000);
+        };
+        
+        // 设置初始值
+        onMounted(() => {
+          // 可以在这里添加初始化代码
+        });
+        
+        return {
+          navItems,
+          activeNav,
+          roles,
+          activeRole,
+          isDragover,
+          fileInput,
+          uploadStatus,
+          fileTypes,
+          switchRole,
+          switchNav,
+          onDragOver,
+          onDragLeave,
+          onDrop,
+          triggerFileInput,
+          onFileSelected,
+          handleFiles
+        };
+      }
+    };
+    
+    const app = createApp({
+      components: {
+        PopQuiz
+      },
+      template: '<pop-quiz />'
+    });
+    
+    app.mount('#app');
+  </script>
+
+  <style>
+    :root {
+      --primary: #4361ee;
+      --secondary: #3f37c9;
+      --success: #4cc9f0;
+      --warning: #f72585;
+      --light: #f8f9fa;
+      --dark: #212529;
+      --gray: #6c757d;
+      --border: #dee2e6;
+      --card-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+      color: var(--dark);
+      min-height: 100vh;
+      padding: 20px;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    /* 顶部导航 */
+    header {
+      background: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      border-radius: 12px;
+      padding: 15px 25px;
+      margin-bottom: 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+    
+    .logo i {
+      color: var(--warning);
+    }
+    
+    .nav-main {
+      display: flex;
+      gap: 5px;
+    }
+    
+    .nav-btn {
+      padding: 10px 20px;
+      border-radius: 8px;
+      background: transparent;
+      border: none;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 500;
+      color: var(--gray);
+    }
+    
+    .nav-btn:hover, .nav-btn.active {
+      background: rgba(67, 97, 238, 0.1);
+      color: var(--primary);
+    }
+    
+    /* 角色选择器 */
+    .role-selector {
+      display: flex;
+      gap: 10px;
+      background: rgba(67, 97, 238, 0.05);
+      padding: 8px;
+      border-radius: 50px;
+    }
+    
+    .role-btn {
+      padding: 8px 20px;
+      border-radius: 30px;
+      background: transparent;
+      border: none;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .role-btn.active {
+      background: var(--primary);
+      color: white;
+      box-shadow: 0 4px 8px rgba(67, 97, 238, 0.3);
+    }
+    
+    /* 主内容区 */
+    .hero {
+      text-align: center;
+      padding: 60px 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .hero h1 {
+      font-size: 2.8rem;
+      margin-bottom: 20px;
+      color: var(--dark);
+      line-height: 1.2;
+    }
+    
+    .hero p {
+      font-size: 1.2rem;
+      color: var(--gray);
+      margin-bottom: 40px;
+      line-height: 1.6;
+    }
+    
+    .cta-buttons {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      margin-bottom: 50px;
+    }
+    
+    .btn {
+      padding: 14px 30px;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      border: none;
+      box-shadow: 0 4px 12px rgba(67, 97, 238, 0.3);
+    }
+    
+    .btn-primary:hover {
+      background: var(--secondary);
+      transform: translateY(-2px);
+    }
+    
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--primary);
+      color: var(--primary);
+    }
+    
+    .btn-outline:hover {
+      background: rgba(67, 97, 238, 0.1);
+      transform: translateY(-2px);
+    }
+    
+    /* 文件上传区域 */
+    .upload-section {
+      background: white;
+      border-radius: 16px;
+      box-shadow: var(--card-shadow);
+      padding: 40px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .section-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    
+    .section-header h2 {
+      font-size: 1.8rem;
+      color: var(--dark);
+      margin-bottom: 10px;
+    }
+    
+    .section-header p {
+      color: var(--gray);
+      font-size: 1.1rem;
+    }
+    
+    .upload-area {
+      border: 2px dashed var(--border);
+      border-radius: 12px;
+      padding: 50px 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: rgba(67, 97, 238, 0.02);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .upload-area:hover {
+      border-color: var(--primary);
+      background: rgba(67, 97, 238, 0.05);
+    }
+    
+    .upload-area.dragover {
+      border-color: var(--primary);
+      background: rgba(67, 97, 238, 0.1);
+    }
+    
+    .upload-icon {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+    }
+    
+    .upload-text {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+      font-weight: 500;
+    }
+    
+    .upload-hint {
+      font-size: 1rem;
+      margin-bottom: 20px;
+    }
+    
+    .file-types {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 30px;
+    }
+    
+    .file-type {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      border-radius: 10px;
+      background: rgba(67, 97, 238, 0.05);
+      width: 120px;
+      transition: all 0.3s ease;
+    }
+    
+    .file-type:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    }
+    
+    .file-type i {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 15px;
+    }
+    
+    .file-type span {
+      font-weight: 500;
+      color: var(--dark);
+    }
+    
+    /* 页脚 */
+    footer {
+      text-align: center;
+      padding: 40px 0;
+      margin-top: 60px;
+      color: var(--gray);
+      border-top: 1px solid var(--border);
+    }
+    
+    .footer-links {
+      display: flex;
+      gap: 25px;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    
+    .footer-links a {
+      color: var(--gray);
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+    
+    /* 响应式设计 */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        gap: 15px;
+      }
+      
+      .nav-main {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+      
+      .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .file-types {
+        flex-wrap: wrap;
+      }
+    }
+  </style>
+</body>
+</html>
