@@ -1,6 +1,6 @@
 package com.njust.springboot.common;
 
-public class Result {
+public class Result {//一切数据都包装到这里
     private String code;
     private String msg;
     private Object data;
@@ -15,6 +15,19 @@ public class Result {
     public static Result success(Object data) {
         Result result = success();
         result.setData(data);
+        return result;
+    }
+
+    public static Result error() {
+        Result result = new Result();
+        result.setCode("500");
+        result.setMsg("error");
+        return result;
+    }
+    public static Result error(String code,String msg) {
+        Result result = new Result();
+        result.setCode(code);
+        result.setMsg(msg);
         return result;
     }
 
