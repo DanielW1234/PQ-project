@@ -1,129 +1,78 @@
 <template>
-  <div class="speaker-view">
-    <div class="view-header">
-      <h2>演讲者统计面板</h2>
-      <p>查看听众答题情况和统计信息</p>
-    </div>
-    
-    <div class="stats-grid">
-      <div class="stat-card">
-        <div class="stat-value">35</div>
-        <div class="stat-label">听众人数</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-value">85%</div>
-        <div class="stat-label">答题参与率</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-value">72%</div>
-        <div class="stat-label">平均正确率</div>
-      </div>
-    </div>
-    
-    <div class="question-stats">
-      <h3>问题统计</h3>
-      
-      <div class="question-stat">
-        <div class="quiz-question">1. PopQuiz的主要功能是什么？</div>
-        <div>答题率: 85%</div>
-        <div class="stat-bar">
-          <div class="stat-bar-fill" style="width: 85%"></div>
+  <div>
+    <Header />
+    <main>
+      <div class="role-view">
+        <div class="role-header">
+          <button class="logout-btn" @click="logout">
+            <i class="fas fa-sign-out-alt"></i> 退出登录
+          </button>
+          
+          <div>
+            <h2 class="welcome-title">欢迎回来，{{ username }}！</h2>
+            <span class="role-t极狐ag">演讲者视图</span>
+          </div>
         </div>
-        <div>正确率: 72%</div>
-        <div class="stat-bar">
-          <div class="stat-bar-fill" style="width: 72%"></div>
+        
+        <div class="function-cards">
+          <div class="function-card" @click="navigateTo('create-quiz')">
+            <i class="fas fa-plus-circle"></i>
+            <h3>创建测验</h3>
+            <p>为您的课堂制作新测验</p>
+          </div>
+          <div class="function-card" @click="navigateTo('upload')">
+            <i class="fas fa-file-upload"></i>
+            <h3>上传内容</h3>
+            <p>上传PPT或PDF生成测验</p>
+          </div>
+          <div class="function-card" @click="navigateTo('analytics')">
+            <i class="fas fa-chart-pie"></i>
+            <h3>分析结果</h3>
+            <p>查看学生答题统计数据</p>
+          </div>
         </div>
       </div>
-      
-      <div class="question-stat">
-        <div class="quiz-question">2. AI生成测验题目的优势是什么？</div>
-        <div>答题率: 78%</div>
-        <div class="stat-bar">
-          <div class="stat-bar-fill" style="width: 78%"></div>
-        </div>
-        <div>正确率: 65%</div>
-        <div class="stat-bar">
-          <div class="stat-bar-fill" style="width: 65%"></div>
-        </div>
+    </main>
+    <footer>
+      <div class="footer-links">
+        <a href="#">关于我们</a>
+        <a href="#">隐私政策</a>
+        <a href="#">使用条款</a>
+        <a href="#">帮助中心</a>
+        <a href="#">联系我们</a>
       </div>
-    </div>
+      <p>© 2025 PopQuiz 智能课堂互动系统 | 让知识传递更高效</p>
+    </footer>
   </div>
 </template>
 
-<style scoped>
-.speaker-view {
-  background: white;
-  border-radius: 16px;
-  box-shadow: var(--card-shadow);
-  padding: 40px;
-  max-width: 800px;
-  margin: 20px auto;
-}
+<script>
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import Header from '@/components/Header.vue'
 
-.view-header {
-  text-align: center;
-  margin-bottom: 30px;
+export default {
+  components: {
+    Header
+  },
+  setup() {
+    const router = useRouter()
+    const username = ref('演讲者用户') // 在实际应用中应从登录状态获取
+    
+    const logout = () => {
+      // 清除登录状态
+      router.push({ name: 'home' })
+    }
+    
+    const navigateTo = (routeName) => {
+      router.push({ name: routeName })
+    }
+    
+    return {
+      username,
+      logout,
+      navigateTo
+    }
+  }
 }
-
-.view-header h2 {
-  font-size: 1.8rem;
-  color: var(--dark);
-  margin-bottom: 10px;
-}
-
-.view-header p {
-  color: var(--gray);
-  font-size: 1.1rem;
-}
-
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
-  margin-bottom: 30px;
-}
-
-.stat-card {
-  background: rgba(67, 97, 238, 0.05);
-  border-radius: 12px;
-  padding: 20px;
-  text-align: center;
-}
-
-.stat-value {
-  font-size: 2rem;
-  font-weight: bold;
-  color: var(--primary);
-  margin-bottom: 10px;
-}
-
-.stat-label {
-  color: var(--gray);
-}
-
-.question-stats {
-  margin-top: 30px;
-}
-
-.question-stat {
-  background: white;
-  border-radius: 12px;
-  padding: 20px;
-  margin-bottom: 15px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-}
-
-.stat-bar {
-  height: 10px;
-  background: var(--border);
-  border-radius: 5px;
-  margin-top: 10px;
-  overflow: hidden;
-}
-
-.stat-bar-fill {
-  height: 100%;
-  background: var(--primary);
-  border-radius: 5px;
-}
-</style>
+</script>

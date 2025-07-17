@@ -1,8 +1,11 @@
 <template>
-  <div class="container">
-    <Header v-if="showHeader" />
-    <router-view />
-    <footer v-if="showFooter">
+  <div>
+    <Header />
+    <main>
+      <HeroSection />
+      <UploadSection />
+    </main>
+    <footer>
       <div class="footer-links">
         <a href="#">关于我们</a>
         <a href="#">隐私政策</a>
@@ -17,18 +20,14 @@
 
 <script>
 import Header from '@/components/Header.vue'
+import HeroSection from '@/components/HeroSection.vue'
+import UploadSection from '@/components/UploadSection.vue'
 
 export default {
   components: {
-    Header
-  },
-  computed: {
-    showHeader() {
-      return this.$route.name !== 'auth'
-    },
-    showFooter() {
-      return this.$route.name !== 'auth'
-    }
+    Header,
+    HeroSection,
+    UploadSection
   }
 }
 </script>
