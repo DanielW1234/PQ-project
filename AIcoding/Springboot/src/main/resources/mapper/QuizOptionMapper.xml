@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.njust.springboot.mapper.QuizOptionMapper">
+    <resultMap id="QuizOptionResultMap" type="com.njust.springboot.entity.QuizOption">
+        <id property="id" column="id" />
+        <result property="quizId" column="quiz_id" />
+        <result property="optionLabel" column="option_label" />
+        <result property="optionText" column="option_text" />
+    </resultMap>
+
+    <insert id="insert" parameterType="com.njust.springboot.entity.QuizOption">
+        INSERT INTO quiz_options (quiz_id, option_label, option_text)
+        VALUES (#{quizId}, #{optionLabel}, #{optionText})
+    </insert>
+
+    <delete id="deleteById" parameterType="long">
+        DELETE FROM quiz_options WHERE id = #{id}
+    </delete>
+
+    <update id="update" parameterType="com.njust.springboot.entity.QuizOption">
+        UPDATE quiz_options
+        SET quiz_id = #{quizId}, option_label = #{optionLabel}, option_text = #{optionText}
+        WHERE id = #{id}
+    </update>
+
+    <select id="selectById" parameterType="long" resultMap="QuizOptionResultMap">
+        SELECT * FROM quiz_options WHERE id = #{id}
+    </select>
+
+    <select id="selectAll" resultMap="QuizOptionResultMap">
+        SELECT * FROM quiz_options
+    </select>
+</mapper> 

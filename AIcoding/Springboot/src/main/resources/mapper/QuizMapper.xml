@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.njust.springboot.mapper.QuizMapper">
+    <resultMap id="QuizResultMap" type="com.njust.springboot.entity.Quiz">
+        <id property="id" column="id" />
+        <result property="lectureId" column="lecture_id" />
+        <result property="fileIndex" column="file_index" />
+        <result property="questionText" column="question_text" />
+        <result property="correctOption" column="correct_option" />
+        <result property="createdAt" column="created_at" />
+        <result property="aiParing" column="AI_paring" />
+    </resultMap>
+
+    <insert id="insert" parameterType="com.njust.springboot.entity.Quiz">
+        INSERT INTO quizzes (lecture_id, file_index, question_text, correct_option, created_at, AI_paring)
+        VALUES (#{lectureId}, #{fileIndex}, #{questionText}, #{correctOption}, #{createdAt}, #{aiParing})
+    </insert>
+
+    <delete id="deleteById" parameterType="long">
+        DELETE FROM quizzes WHERE id = #{id}
+    </delete>
+
+    <update id="update" parameterType="com.njust.springboot.entity.Quiz">
+        UPDATE quizzes
+        SET lecture_id = #{lectureId}, file_index = #{fileIndex}, question_text = #{questionText},
+            correct_option = #{correctOption}, created_at = #{createdAt}, AI_paring = #{aiParing}
+        WHERE id = #{id}
+    </update>
+
+    <select id="selectById" parameterType="long" resultMap="QuizResultMap">
+        SELECT * FROM quizzes WHERE id = #{id}
+    </select>
+
+    <select id="selectAll" resultMap="QuizResultMap">
+        SELECT * FROM quizzes
+    </select>
+</mapper> 

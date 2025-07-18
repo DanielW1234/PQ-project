@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.njust.springboot.mapper.LectureContentMapper">
+    <resultMap id="LectureContentResultMap" type="com.njust.springboot.entity.LectureContent">
+        <id property="id" column="id" />
+        <result property="lectureId" column="lecture_id" />
+        <result property="contentType" column="content_type" />
+        <result property="originalName" column="original_name" />
+        <result property="storagePath" column="storage_path" />
+        <result property="processedText" column="processed_text" />
+        <result property="uploadedAt" column="uploaded_at" />
+        <result property="processedAt" column="processed_at" />
+        <result property="isDownload" column="is_download" />
+        <result property="fileLength" column="file_length" />
+    </resultMap>
+
+    <insert id="insert" parameterType="com.njust.springboot.entity.LectureContent">
+        INSERT INTO lecture_contents (lecture_id, content_type, original_name, storage_path, processed_text, uploaded_at, processed_at, is_download, file_length)
+        VALUES (#{lectureId}, #{contentType}, #{originalName}, #{storagePath}, #{processedText}, #{uploadedAt}, #{processedAt}, #{isDownload}, #{fileLength})
+    </insert>
+
+    <delete id="deleteById" parameterType="long">
+        DELETE FROM lecture_contents WHERE id = #{id}
+    </delete>
+
+    <update id="update" parameterType="com.njust.springboot.entity.LectureContent">
+        UPDATE lecture_contents
+        SET lecture_id = #{lectureId}, content_type = #{contentType}, original_name = #{originalName},
+            storage_path = #{storagePath}, processed_text = #{processedText}, uploaded_at = #{uploadedAt},
+            processed_at = #{processedAt}, is_download = #{isDownload}, file_length = #{fileLength}
+        WHERE id = #{id}
+    </update>
+
+    <select id="selectById" parameterType="long" resultMap="LectureContentResultMap">
+        SELECT * FROM lecture_contents WHERE id = #{id}
+    </select>
+
+    <select id="selectAll" resultMap="LectureContentResultMap">
+        SELECT * FROM lecture_contents
+    </select>
+</mapper> 

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.njust.springboot.mapper.AnswerMapper">
+    <resultMap id="AnswerResultMap" type="com.njust.springboot.entity.Answer">
+        <id property="id" column="id" />
+        <result property="userId" column="user_id" />
+        <result property="quizId" column="quiz_id" />
+        <result property="chosenOption" column="chosen_option" />
+        <result property="isCorrect" column="is_correct" />
+        <result property="isAnswer" column="is_answer" />
+    </resultMap>
+
+    <insert id="insert" parameterType="com.njust.springboot.entity.Answer">
+        INSERT INTO answers (user_id, quiz_id, chosen_option, is_correct, is_answer)
+        VALUES (#{userId}, #{quizId}, #{chosenOption}, #{isCorrect}, #{isAnswer})
+    </insert>
+
+    <delete id="deleteById" parameterType="long">
+        DELETE FROM answers WHERE id = #{id}
+    </delete>
+
+    <update id="update" parameterType="com.njust.springboot.entity.Answer">
+        UPDATE answers
+        SET user_id = #{userId}, quiz_id = #{quizId}, chosen_option = #{chosenOption},
+            is_correct = #{isCorrect}, is_answer = #{isAnswer}
+        WHERE id = #{id}
+    </update>
+
+    <select id="selectById" parameterType="long" resultMap="AnswerResultMap">
+        SELECT * FROM answers WHERE id = #{id}
+    </select>
+
+    <select id="selectAll" resultMap="AnswerResultMap">
+        SELECT * FROM answers
+    </select>
+</mapper> 

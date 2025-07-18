@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    name: sys
+    url: jdbc:mysql://localhost:3306/sys
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis:
+  #映射文件
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    #配置日志
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    #将数据库下划线命名转到java的驼峰
+    map-underscore-to-camel-case: true

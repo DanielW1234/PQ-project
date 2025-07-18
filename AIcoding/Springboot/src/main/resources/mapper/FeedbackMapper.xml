@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.njust.springboot.mapper.FeedbackMapper">
+    <resultMap id="FeedbackResultMap" type="com.njust.springboot.entity.Feedback">
+        <id property="id" column="id" />
+        <result property="userId" column="user_id" />
+        <result property="lectureId" column="lecture_id" />
+        <result property="feedbackType" column="feedback_type" />
+        <result property="comment" column="comment" />
+        <result property="createdAt" column="created_at" />
+    </resultMap>
+
+    <insert id="insert" parameterType="com.njust.springboot.entity.Feedback">
+        INSERT INTO feedbacks (user_id, lecture_id, feedback_type, comment, created_at)
+        VALUES (#{userId}, #{lectureId}, #{feedbackType}, #{comment}, #{createdAt})
+    </insert>
+
+    <delete id="deleteById" parameterType="long">
+        DELETE FROM feedbacks WHERE id = #{id}
+    </delete>
+
+    <update id="update" parameterType="com.njust.springboot.entity.Feedback">
+        UPDATE feedbacks
+        SET user_id = #{userId}, lecture_id = #{lectureId}, feedback_type = #{feedbackType},
+            comment = #{comment}, created_at = #{createdAt}
+        WHERE id = #{id}
+    </update>
+
+    <select id="selectById" parameterType="long" resultMap="FeedbackResultMap">
+        SELECT * FROM feedbacks WHERE id = #{id}
+    </select>
+
+    <select id="selectAll" resultMap="FeedbackResultMap">
+        SELECT * FROM feedbacks
+    </select>
+</mapper> 

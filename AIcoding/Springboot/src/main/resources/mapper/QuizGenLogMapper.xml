@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.njust.springboot.mapper.QuizGenLogMapper">
+    <resultMap id="QuizGenLogResultMap" type="com.njust.springboot.entity.QuizGenLog">
+        <id property="id" column="id" />
+        <result property="lectureId" column="lecture_id" />
+        <result property="requestTime" column="request_time" />
+        <result property="prompt" column="prompt" />
+        <result property="response" column="response" />
+        <result property="status" column="status" />
+    </resultMap>
+
+    <insert id="insert" parameterType="com.njust.springboot.entity.QuizGenLog">
+        INSERT INTO quiz_gen_logs (lecture_id, request_time, prompt, response, status)
+        VALUES (#{lectureId}, #{requestTime}, #{prompt}, #{response}, #{status})
+    </insert>
+
+    <delete id="deleteById" parameterType="long">
+        DELETE FROM quiz_gen_logs WHERE id = #{id}
+    </delete>
+
+    <update id="update" parameterType="com.njust.springboot.entity.QuizGenLog">
+        UPDATE quiz_gen_logs
+        SET lecture_id = #{lectureId}, request_time = #{requestTime}, prompt = #{prompt},
+            response = #{response}, status = #{status}
+        WHERE id = #{id}
+    </update>
+
+    <select id="selectById" parameterType="long" resultMap="QuizGenLogResultMap">
+        SELECT * FROM quiz_gen_logs WHERE id = #{id}
+    </select>
+
+    <select id="selectAll" resultMap="QuizGenLogResultMap">
+        SELECT * FROM quiz_gen_logs
+    </select>
+</mapper> 
