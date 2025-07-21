@@ -1,0 +1,52 @@
+body {
+  font-family: 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif;
+  background: #f6f8fa;
+  margin: 0;
+  padding: 0;
+}
+.btn {
+  background: #4361ee;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-primary {
+  background: #4361ee;
+}
+.btn-primary:hover {
+  background: #2747b0;
+}
+.btn-secondary {
+  background: #6c757d;
+}
+.btn-secondary:hover {
+  background: #495057;
+}
+input, textarea {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 8px;
+  font-size: 15px;
+  margin-bottom: 8px;
+  outline: none;
+  transition: border 0.2s;
+}
+input:focus, textarea:focus {
+  border: 1.5px solid #4361ee;
+}
+.error-message {
+  color: #e74c3c;
+  background: #fff0f0;
+  border-radius: 4px;
+  padding: 8px 0;
+}
+.success-message {
+  color: #27ae60;
+  background: #eafaf1;
+  border-radius: 4px;
+  padding: 8px 0;
+} 
