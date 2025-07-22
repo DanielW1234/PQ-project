@@ -5,6 +5,10 @@ spring:
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 60MB
 
 mybatis:
   #映射文件
@@ -14,3 +18,4 @@ mybatis:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     #将数据库下划线命名转到java的驼峰
     map-underscore-to-camel-case: true
+
