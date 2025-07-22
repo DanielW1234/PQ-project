@@ -93,6 +93,7 @@
 
 <script>
 import { ref } from 'vue'
+import { register as apiRegister } from '@/api/index.js'
 
 export default {
   emits: ['register-success', 'switch-tab'],
@@ -104,57 +105,47 @@ export default {
     const error = ref('')
     const success = ref(false)
     
-    const register = () => {
-      // 重置状态
+    const register = async () => {
       error.value = ''
       success.value = false
-      
-      // 验证输入
       if (!username.value) {
         error.value = '请输入用户名'
         return
       }
-      
       if (!password.value) {
         error.value = '请输入密码'
         return
       }
-      
       if (password.value.length < 6) {
         error.value = '密码长度至少6位'
         return
       }
-      
       if (password.value !== confirmPassword.value) {
         error.value = '两次输入的密码不一致'
         return
       }
-      
       if (!role.value) {
         error.value = '请选择角色'
         return
       }
-      
-      // 在实际应用中，这里应该发送API请求注册用户
-      // 这里只是模拟注册过程
-      
-      // 注册成功
-      success.value = true
-      emit('register-success', {
-        username: username.value,
-        role: role.value
-      })
-      
-      // 清空表单
-      username.value = ''
-      password.value = ''
-      confirmPassword.value = ''
-      
-      // 3秒后切换到登录标签页
-      setTimeout(() => {
-        emit('switch-tab', 'login')
-        success.value = false
-      }, 3000)
+      try {
+        const res = await apiRegister({ username: username.value, password: password.value, role: role.value })
+        if (res.data.code === 'success') {
+          success.value = true
+          emit('register-success', res.data.user)
+          username.value = ''
+          password.value = ''
+          confirmPassword.value = ''
+          setTimeout(() => {
+            emit('switch-tab', 'login')
+            success.value = false
+          }, 2000)
+        } else {
+          error.value = res.data.msg || '注册失败'
+        }
+      } catch (e) {
+        error.value = '注册失败，请检查网络或稍后重试'
+      }
     }
     
     return {
@@ -168,4 +159,4 @@ export default {
     }
   }
 }
-</script>
+</script> 

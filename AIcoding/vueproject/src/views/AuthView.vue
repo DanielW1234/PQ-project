@@ -63,3 +63,32 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.auth-container {
+  max-width: 400px;
+  margin: 80px auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(67,97,238,0.08);
+  padding: 32px 24px 24px 24px;
+}
+.tabs {
+  display: flex;
+  margin-bottom: 24px;
+}
+.tab {
+  flex: 1;
+  text-align: center;
+  padding: 12px 0;
+  cursor: pointer;
+  font-weight: bold;
+  border-bottom: 2px solid #eee;
+  color: #888;
+  transition: all 0.2s;
+}
+.tab.active {
+  color: #4361ee;
+  border-bottom: 2px solid #4361ee;
+}
+</style> 

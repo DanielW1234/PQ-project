@@ -1,85 +1,63 @@
 <template>
-  <header>
-    <div class="logo">
-      <i class="fas fa-bolt"></i>
-      <span>PopQuiz</span>
+  <header class="header">
+    <div class="logo" @click="goHome">
+      <span class="logo-text">PopQuiz</span>
     </div>
-    
-    <div class="nav-main">
-      <button 
-        v-for="(nav, index) in navItems" 
-        :key="index"
-        class="nav-btn" 
-        :class="{ active: activeNav === nav }"
-        @click="switchNav(nav)"
-      >
-        {{ nav }}
-      </button>
-    </div>
-    
-    <div class="role-selector">
-      <button 
-        class="role-btn" 
-        :class="{ active: role === 'organizer' }"
-        @click="switchRole('organizer')"
-      >
-        组织者
-      </button>
-      <button 
-        class="role-btn" 
-        :class="{ active: role === 'speaker' }"
-        @click="switchRole('speaker')"
-      >
-        演讲者
-      </button>
-      <button 
-        class="role-btn" 
-        :class="{ active: role === 'audience' }"
-        @click="switchRole('audience')"
-      >
-        听众
-      </button>
-    </div>
+    <nav class="nav">
+      <router-link to="/" class="nav-link">首页</router-link>
+      <router-link to="/auth" class="nav-link">登录/注册</router-link>
+      <router-link to="/organizer" class="nav-link">组织者</router-link>
+      <router-link to="/speaker" class="nav-link">演讲者</router-link>
+      <router-link to="/audience" class="nav-link">听众</router-link>
+    </nav>
   </header>
 </template>
 
 <script>
-import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-
 export default {
+  name: 'Header',
   setup() {
     const router = useRouter()
-    const role = ref('organizer')
-    const activeNav = ref('仪表盘')
-    const navItems = ref(['仪表盘', '内容管理', '答题统计', '讨论区', '徽章成就', '设置'])
-    
-    const switchRole = (selectedRole) => {
-      role.value = selectedRole
-      switch(selectedRole) {
-        case 'audience':
-          router.push({ name: 'audience' })
-          break
-        case 'speaker':
-          router.push({ name: 'speaker' })
-          break
-        case 'organizer':
-          router.push({ name: 'organizer' })
-          break
-      }
+    const goHome = () => {
+      router.push({ name: 'home' })
     }
-    
-    const switchNav = (nav) => {
-      activeNav.value = nav
-    }
-    
-    return {
-      role,
-      activeNav,
-      navItems,
-      switchRole,
-      switchNav
-    }
+    return { goHome }
   }
 }
 </script>
+
+<style scoped>
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #4361ee;
+  color: #fff;
+  padding: 0 32px;
+  height: 56px;
+  box-shadow: 0 2px 8px rgba(67,97,238,0.08);
+}
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.logo-text {
+  color: #fff;
+  letter-spacing: 2px;
+}
+.nav {
+  display: flex;
+  gap: 24px;
+}
+.nav-link {
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+  transition: color 0.2s;
+}
+.nav-link:hover {
+  color: #ffd700;
+}
+</style> 
