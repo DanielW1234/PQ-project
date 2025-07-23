@@ -8,7 +8,7 @@ public class User {
     private String password;
     private String role;
     private String nickname;
-    private Boolean isAnonymous;
+    private Integer isAnonymous;
     private Date createdAt;
     private Date updatedAt;
 
@@ -54,12 +54,12 @@ public class User {
         this.nickname = nickname;
     }
 
-    public Boolean getAnonymous() {
+    public Integer getIsAnonymous() {
         return isAnonymous;
     }
 
-    public void setAnonymous(Boolean anonymous) {
-        isAnonymous = anonymous;
+    public void setIsAnonymous(Integer isAnonymous) {
+        this.isAnonymous = isAnonymous;
     }
 
     public Date getCreatedAt() {

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import jakarta.annotation.Resource;
 import java.util.List;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import java.util.Date;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -49,6 +50,19 @@ public class UserServiceImpl implements UserService {
     public boolean register(User user) {
         if (userMapper.selectByUsername(user.getUsername()) != null) {
             return false;
+        }
+        if (user.getIsAnonymous() == null) {
+            user.setIsAnonymous(0);
+        }
+        if (user.getRole() == null) {
+            user.setRole("user");
+        }
+        Date now = new Date();
+        if (user.getCreatedAt() == null) {
+            user.setCreatedAt(now);
+        }
+        if (user.getUpdatedAt() == null) {
+            user.setUpdatedAt(now);
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userMapper.insert(user) > 0;
