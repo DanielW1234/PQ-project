@@ -9,4 +9,7 @@ public interface UserService {
     int updateUser(User user);
     User getUserById(Long id);
     List<User> getAllUsers();
+    User findByUsername(String username);
+    boolean register(User user);
+    User login(String username, String password);
 }

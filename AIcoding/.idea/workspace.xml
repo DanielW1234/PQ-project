@@ -4,12 +4,43 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="170e8f4c-b101-4ac1-a118-d4755a0bab6a" name="更改" comment="entity-bug">
-      <change afterPath="$PROJECT_DIR$/Springboot/src/main/java/com/njust/springboot/controller/filesController.java" afterDir="false" />
+    <list default="true" id="170e8f4c-b101-4ac1-a118-d4755a0bab6a" name="更改" comment="文件上传功能">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/a5d9f915-15c5-4118-9513-e187c82636a4/storage_v2/_src_/schema/dormitoryms.C7Y51Q.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/a5d9f915-15c5-4118-9513-e187c82636a4/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/a5d9f915-15c5-4118-9513-e187c82636a4/storage_v2/_src_/schema/meditestlab._ryn9w.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/a5d9f915-15c5-4118-9513-e187c82636a4/storage_v2/_src_/schema/mysql.osA4Bg.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/a5d9f915-15c5-4118-9513-e187c82636a4/storage_v2/_src_/schema/performance_schema.kIw0nw.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/a5d9f915-15c5-4118-9513-e187c82636a4/storage_v2/_src_/schema/sys.zb4BAA.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/a5d9f915-15c5-4118-9513-e187c82636a4/storage_v2/_src_/schema/team_jdbc.nRuC9Q.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/d33ee7ff-fca7-485f-83f3-cd226055f4c5/storage_v2/_src_/schema/aicourse.Qy4Dvg.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../processionPicture/~$Procession.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../processionPicture/~$foreProcession.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../processionPicture/~$terProcession.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a5d9f915-15c5-4118-9513-e187c82636a4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a5d9f915-15c5-4118-9513-e187c82636a4/storage_v2/_src_/schema/aicourse.Qy4Dvg.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/a5d9f915-15c5-4118-9513-e187c82636a4/storage_v2/_src_/schema/aicourse.Qy4Dvg.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Springboot/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Springboot/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Springboot/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/target/classes/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Springboot/src/main/java/com/njust/springboot/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/src/main/java/com/njust/springboot/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Springboot/src/main/java/com/njust/springboot/mapper/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/src/main/java/com/njust/springboot/mapper/UserMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Springboot/src/main/java/com/njust/springboot/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/src/main/java/com/njust/springboot/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Springboot/src/main/java/com/njust/springboot/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/src/main/java/com/njust/springboot/service/impl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Springboot/src/main/resources/mapper/UserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/src/main/resources/mapper/UserMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/SpringbootApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/SpringbootApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/common/Result.class" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/common/Result.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/controller/AnswerController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/controller/AnswerController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/controller/AttendanceController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/controller/AttendanceController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/controller/DiscussionController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/controller/DiscussionController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/controller/FeedbackController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/controller/FeedbackController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/controller/LectureContentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/controller/LectureContentController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/controller/LectureController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/controller/LectureController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/controller/QuizController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/controller/QuizController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/controller/QuizGenLogController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/controller/QuizGenLogController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/controller/QuizOptionController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/controller/QuizOptionController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/controller/UserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/controller/filesController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/controller/filesController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/controller/newController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/controller/newController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/entity/Answer.class" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/entity/Answer.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/entity/Attendance.class" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/entity/Attendance.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/entity/Discussion.class" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/entity/Discussion.class" afterDir="false" />
@@ -19,6 +50,43 @@
       <change beforePath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/entity/Quiz.class" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/entity/Quiz.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/entity/QuizGenLog.class" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/entity/QuizGenLog.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/entity/QuizOption.class" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/entity/QuizOption.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/entity/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/entity/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/exception/CustomException.class" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/exception/CustomException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/exception/GlobalExceptionHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/exception/GlobalExceptionHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/mapper/AnswerMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/mapper/AnswerMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/mapper/AttendanceMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/mapper/AttendanceMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/mapper/DiscussionMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/mapper/DiscussionMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/mapper/FeedbackMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/mapper/FeedbackMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/mapper/LectureContentMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/mapper/LectureContentMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/mapper/LectureMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/mapper/LectureMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/mapper/QuizGenLogMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/mapper/QuizGenLogMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/mapper/QuizMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/mapper/QuizMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/mapper/QuizOptionMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/mapper/QuizOptionMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/mapper/UserMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/mapper/UserMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/service/AnswerService.class" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/service/AnswerService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/service/AttendanceService.class" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/service/AttendanceService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/service/DiscussionService.class" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/service/DiscussionService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/service/FeedbackService.class" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/service/FeedbackService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/service/LectureContentService.class" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/service/LectureContentService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/service/LectureService.class" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/service/LectureService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/service/QuizGenLogService.class" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/service/QuizGenLogService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/service/QuizOptionService.class" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/service/QuizOptionService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/service/QuizService.class" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/service/QuizService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/service/UserService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/service/impl/AnswerServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/service/impl/AnswerServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/service/impl/AttendanceServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/service/impl/AttendanceServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/service/impl/DiscussionServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/service/impl/DiscussionServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/service/impl/FeedbackServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/service/impl/FeedbackServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/service/impl/LectureContentServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/service/impl/LectureContentServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/service/impl/LectureServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/service/impl/LectureServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/service/impl/QuizGenLogServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/service/impl/QuizGenLogServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/service/impl/QuizOptionServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/service/impl/QuizOptionServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/service/impl/QuizServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/service/impl/QuizServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/service/impl/UserServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/target/classes/com/njust/springboot/service/impl/UserServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Springboot/target/classes/mapper/UserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Springboot/target/classes/mapper/UserMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../processionPicture/afterProcession.docx" beforeDir="false" afterPath="$PROJECT_DIR$/../processionPicture/afterProcession.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../processionPicture/beforeProcession.docx" beforeDir="false" afterPath="$PROJECT_DIR$/../processionPicture/beforeProcession.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../processionPicture/inProcession.docx" beforeDir="false" afterPath="$PROJECT_DIR$/../processionPicture/inProcession.docx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,38 +116,38 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Node.js.router.js.executor": "Run",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenDatabaseViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Spring Boot.SpringbootApplication.executor": "Run",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/MySql-Server-8.0/MySQL Server 8.0/bin",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "项目",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "http.proxy",
-    "ts.external.directory.path": "D:\\Program Files\\JetBrains\\IntelliJ IDEA 2024.1\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Node.js.router.js.executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenDatabaseViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Spring Boot.SpringbootApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/MySql-Server-8.0/MySQL Server 8.0/bin&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;项目&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;http.proxy&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;D:\\Program Files\\JetBrains\\IntelliJ IDEA 2024.1\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="SpringbootApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="Springboot" />
@@ -109,6 +177,8 @@
       <workItem from="1753091434464" duration="2463000" />
       <workItem from="1753155449275" duration="1889000" />
       <workItem from="1753171698694" duration="12380000" />
+      <workItem from="1753192256404" duration="571000" />
+      <workItem from="1753251772600" duration="3353000" />
     </task>
     <task id="LOCAL-00001" summary="entity-bug">
       <option name="closed" value="true" />
@@ -118,7 +188,15 @@
       <option name="project" value="LOCAL" />
       <updated>1753157262183</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="文件上传功能">
+      <option name="closed" value="true" />
+      <created>1753192319314</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1753192319314</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -149,7 +227,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="entity-bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="entity-bug" />
+    <MESSAGE value="文件上传功能" />
+    <option name="LAST_COMMIT_MESSAGE" value="文件上传功能" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

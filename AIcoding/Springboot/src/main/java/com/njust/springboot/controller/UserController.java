@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.njust.springboot.entity.User;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/user")
@@ -46,5 +47,19 @@ public class UserController {
     public Result delete(@PathVariable Long id) {
         userService.deleteUser(id);
         return Result.success();
+    }
+
+    @PostMapping("/register")
+    public Result register(@RequestBody User user) {
+        boolean success = userService.register(user);
+        return success ? Result.success() : Result.error("400", "用户名已存在");
+    }
+
+    @PostMapping("/login")
+    public Result login(@RequestBody Map<String, String> map) {
+        String username = map.get("username");
+        String password = map.get("password");
+        User user = userService.login(username, password);
+        return user != null ? Result.success(user) : Result.error("400", "用户名或密码错误");
     }
 }

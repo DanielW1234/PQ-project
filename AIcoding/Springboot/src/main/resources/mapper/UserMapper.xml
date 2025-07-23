@@ -35,4 +35,8 @@
     <select id="selectAll" resultMap="UserResultMap">
         SELECT * FROM users
     </select>
+
+    <select id="selectByUsername" resultType="com.njust.springboot.entity.User">
+        SELECT * FROM users WHERE username = #{username}
+    </select>
 </mapper>

@@ -6,11 +6,14 @@ import com.njust.springboot.service.UserService;
 import org.springframework.stereotype.Service;
 import jakarta.annotation.Resource;
 import java.util.List;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Service
 public class UserServiceImpl implements UserService {
     @Resource
     private UserMapper userMapper;
+
+    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @Override
     public int addUser(User user) {
@@ -35,5 +38,28 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getAllUsers() {
         return userMapper.selectAll();
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        return userMapper.selectByUsername(username);
+    }
+
+    @Override
+    public boolean register(User user) {
+        if (userMapper.selectByUsername(user.getUsername()) != null) {
+            return false;
+        }
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        return userMapper.insert(user) > 0;
+    }
+
+    @Override
+    public User login(String username, String password) {
+        User user = userMapper.selectByUsername(username);
+        if (user != null && passwordEncoder.matches(password, user.getPassword())) {
+            return user;
+        }
+        return null;
     }
 } 
