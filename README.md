@@ -21,7 +21,7 @@
 
 > 后端依赖文件见\AIcoding\Springboot\pom.xml\
 > 前端依赖文件见\AIcoding\vueproject\package.json\
-> 数据库创建代码见\sql.txt\
+> 数据库创建代码见sql.txt
 
 ># 完整部署方法
 
