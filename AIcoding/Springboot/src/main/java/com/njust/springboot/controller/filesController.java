@@ -68,15 +68,15 @@ public class filesController {
     }
 
 
-    @GetMapping("/download/{fileName}")
+    @GetMapping(value = "/download/{fileName:.+}", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
     public void download(@PathVariable String fileName, HttpServletResponse response) {
         try {
-            response.addHeader("Content-Disposition","attachment;filename=" + URLEncoder.encode(fileName, StandardCharsets.UTF_8));
-            //返回响应头
+            // 解码文件名，支持中文
+            String decodedFileName = java.net.URLDecoder.decode(fileName, java.nio.charset.StandardCharsets.UTF_8.name());
+            response.addHeader("Content-Disposition","attachment;filename=" + URLEncoder.encode(decodedFileName, java.nio.charset.StandardCharsets.UTF_8.name()));
             response.setContentType("application/octet-stream");
             OutputStream os = response.getOutputStream();
-            String realPath = filePath + fileName;
-            //获取到文件的字节数组
+            String realPath = filePath + decodedFileName;
             byte[] bytes = FileUtil.readBytes(realPath);
             os.write(bytes);
             os.flush();

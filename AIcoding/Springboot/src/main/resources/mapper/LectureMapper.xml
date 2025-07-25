@@ -14,9 +14,9 @@
         <result property="password" column="password" />
     </resultMap>
 
-    <insert id="insert" parameterType="com.njust.springboot.entity.Lecture">
-        INSERT INTO lectures (title, description, organizer_id, speaker_id, start_time, end_time, created_at, updated_at, password)
-        VALUES (#{title}, #{description}, #{organizerId}, #{speakerId}, #{startTime}, #{endTime}, #{createdAt}, #{updatedAt}, #{password})
+    <insert id="insert" parameterType="com.njust.springboot.entity.Lecture" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO lectures (title, description, organizer_id, speaker_id, start_time, end_time, created_at, updated_at, password, file_url)
+        VALUES (#{title}, #{description}, #{organizerId}, #{speakerId}, #{startTime}, #{endTime}, #{createdAt}, #{updatedAt}, #{password}, #{fileUrl})
     </insert>
 
     <delete id="deleteById" parameterType="long">

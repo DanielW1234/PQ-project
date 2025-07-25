@@ -26,23 +26,23 @@
 <script>
 import { ref, onMounted } from 'vue'
 import Header from '@/components/Header.vue'
-import { getLectures, getAnswersByUser } from '@/api/index.js'
+import { getLectures, getAnswers } from '@/router/index.js'
 
 export default {
   components: { Header },
   setup() {
-    // 实际应用中应从登录状态获取用户信息
-    const user = ref({ username: 'demoUser', role: 'audience', id: 1 })
+    // 从localStorage/sessionStorage获取当前登录用户信息
+    const user = ref(JSON.parse(localStorage.getItem('user') || '{}'))
     const lectures = ref([])
     const answerCount = ref(0)
     const correctCount = ref(0)
 
     const loadStats = async () => {
       const lecturesRes = await getLectures()
-      lectures.value = lecturesRes.data
-      const answersRes = await getAnswersByUser(user.value.id)
-      answerCount.value = answersRes.data.length
-      correctCount.value = answersRes.data.filter(a => a.isCorrect).length
+      lectures.value = lecturesRes.data.data
+      const answersRes = await getAnswers()
+      answerCount.value = answersRes.data.data.length
+      correctCount.value = answersRes.data.data.filter(a => a.isCorrect).length
     }
     onMounted(loadStats)
     return {

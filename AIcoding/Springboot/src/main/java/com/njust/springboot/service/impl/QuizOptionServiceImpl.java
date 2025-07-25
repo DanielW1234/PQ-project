@@ -36,4 +36,9 @@ public class QuizOptionServiceImpl implements QuizOptionService {
     public List<QuizOption> getAllQuizOptions() {
         return quizOptionMapper.selectAll();
     }
+
+    @Override
+    public List<QuizOption> getOptionsByQuizId(Long quizId) {
+        return quizOptionMapper.selectByQuizId(quizId);
+    }
 } 

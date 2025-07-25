@@ -7,6 +7,7 @@ public class Answer {
     private String chosenOption;
     private Boolean isCorrect;
     private Boolean isAnswer;
+    private String selectedOption;
     // getter 和 setter 可用 Lombok 简化
 
     public Long getId() {
@@ -45,8 +46,12 @@ public class Answer {
         return isCorrect;
     }
 
-    public void setCorrect(Boolean correct) {
-        isCorrect = correct;
+    public Boolean getIsCorrect() {
+        return isCorrect;
+    }
+
+    public void setIsCorrect(Boolean isCorrect) {
+        this.isCorrect = isCorrect;
     }
 
     public Boolean getAnswer() {
@@ -55,5 +60,12 @@ public class Answer {
 
     public void setAnswer(Boolean answer) {
         isAnswer = answer;
+    }
+
+    public String getSelectedOption() {
+        return selectedOption;
+    }
+    public void setSelectedOption(String selectedOption) {
+        this.selectedOption = selectedOption;
     }
 }

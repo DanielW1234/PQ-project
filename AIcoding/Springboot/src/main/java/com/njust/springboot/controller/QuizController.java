@@ -6,6 +6,8 @@ import com.njust.springboot.service.QuizService;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/quiz")
 public class QuizController {
@@ -20,6 +22,12 @@ public class QuizController {
     @GetMapping("/{id}")
     public Result getById(@PathVariable Long id) {
         return Result.success(quizService.getQuizById(id));
+    }
+
+    @GetMapping("/stats/{id}")
+    public Result getQuizStats(@PathVariable Long id) {
+        Map<String, Object> stats = quizService.getQuizStats(id);
+        return Result.success(stats);
     }
 
     @PostMapping

@@ -13,6 +13,7 @@ public class Lecture {
     private Date createdAt;
     private Date updatedAt;
     private String password;
+    private String fileUrl;
     // getter 和 setter 可用 Lombok 简化
 
     public Long getId() {
@@ -93,5 +94,13 @@ public class Lecture {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getFileUrl() {
+        return fileUrl;
+    }
+
+    public void setFileUrl(String fileUrl) {
+        this.fileUrl = fileUrl;
     }
 }

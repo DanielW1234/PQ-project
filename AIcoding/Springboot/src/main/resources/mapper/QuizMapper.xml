@@ -11,7 +11,7 @@
         <result property="aiParing" column="AI_paring" />
     </resultMap>
 
-    <insert id="insert" parameterType="com.njust.springboot.entity.Quiz">
+    <insert id="insert" parameterType="com.njust.springboot.entity.Quiz" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO quizzes (lecture_id, file_index, question_text, correct_option, created_at, AI_paring)
         VALUES (#{lectureId}, #{fileIndex}, #{questionText}, #{correctOption}, #{createdAt}, #{aiParing})
     </insert>
@@ -33,5 +33,9 @@
 
     <select id="selectAll" resultMap="QuizResultMap">
         SELECT * FROM quizzes
+    </select>
+
+    <select id="selectByLectureId" resultType="com.njust.springboot.entity.Quiz">
+        SELECT * FROM quizzes WHERE lecture_id = #{lectureId}
     </select>
 </mapper> 

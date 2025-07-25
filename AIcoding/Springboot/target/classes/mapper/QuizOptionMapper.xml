@@ -30,4 +30,8 @@
     <select id="selectAll" resultMap="QuizOptionResultMap">
         SELECT * FROM quiz_options
     </select>
+
+    <select id="selectByQuizId" resultType="com.njust.springboot.entity.QuizOption">
+        SELECT * FROM quiz_options WHERE quiz_id = #{quizId}
+    </select>
 </mapper> 

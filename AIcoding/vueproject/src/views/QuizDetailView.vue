@@ -31,7 +31,7 @@
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import Header from '@/components/Header.vue'
-import { getQuizzesByLecture, getQuizOptions, getDiscussionsByQuiz, submitDiscussion, submitFeedback } from '@/api/index.js'
+import { getQuizzes, getQuizOptions, getDiscussions, addDiscussion, addFeedback } from '@/router/index.js'
 
 export default {
   components: { Header },
@@ -50,14 +50,15 @@ export default {
       loading.value = true
       error.value = ''
       try {
-        // 这里假设你有API可以通过quizId获取题目详情
-        // 这里只做演示，实际应补充getQuizById
-        const quizList = await getQuizzesByLecture(1) // 假设lectureId=1
-        quiz.value = quizList.data.find(q => q.id === quizId)
-        const optRes = await getQuizOptions(quizId)
-        options.value = optRes.data
-        const discRes = await getDiscussionsByQuiz(quizId)
-        discussions.value = discRes.data
+        // 获取所有题目，筛选出当前题目
+        const quizList = await getQuizzes()
+        quiz.value = quizList.data.data.find(q => q.id === quizId)
+        // 获取所有选项，筛选出当前题目的选项
+        const optRes = await getQuizOptions()
+        options.value = optRes.data.data.filter(opt => opt.quizId === quizId)
+        // 获取所有讨论，筛选出当前题目的讨论
+        const discRes = await getDiscussions()
+        discussions.value = discRes.data.data.filter(d => d.quizId === quizId)
       } catch (e) {
         error.value = '加载失败'
       } finally {
@@ -66,13 +67,13 @@ export default {
     }
     const submitDiscussionFn = async () => {
       if (!newDiscussion.value) return
-      await submitDiscussion({ quizId, userId: 1, content: newDiscussion.value })
+      await addDiscussion({ quizId, userId: 1, content: newDiscussion.value })
       discussions.value.push({ content: newDiscussion.value })
       newDiscussion.value = ''
     }
     const submitFeedbackFn = async () => {
       if (!feedback.value) return
-      await submitFeedback({ quizId, userId: 1, feedbackType: '题目反馈', comment: feedback.value })
+      await addFeedback({ quizId, userId: 1, feedbackType: '题目反馈', comment: feedback.value })
       feedback.value = ''
       alert('反馈已提交')
     }

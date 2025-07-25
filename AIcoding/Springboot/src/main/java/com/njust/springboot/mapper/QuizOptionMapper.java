@@ -11,4 +11,5 @@ public interface QuizOptionMapper {
     int update(QuizOption option);
     QuizOption selectById(Long id);
     List<QuizOption> selectAll();
+    List<QuizOption> selectByQuizId(Long quizId);
 } 

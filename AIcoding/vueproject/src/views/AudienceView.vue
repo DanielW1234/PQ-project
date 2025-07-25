@@ -1,53 +1,46 @@
 <template>
-  <div>
-    <Header />
-    <main>
-      <div class="role-view">
-        <div class="role-header">
-          <button class="logout-btn" @click="logout">
-            <i class="fas fa-sign-out-alt"></i> 退出登录
-          </button>
-          <div>
-            <h2 class="welcome-title">欢迎回来，{{ username }}！</h2>
-            <span class="role-tag">听众视图</span>
+  <div class="role-page-container">
+    <header class="header-bar">
+      <div class="brand">PopQuiz</div>
+      <nav class="nav-links">
+        <router-link to="/" class="nav-link">首页</router-link>
+        <router-link to="/audience" class="nav-link">听众</router-link>
+      </nav>
+    </header>
+    <div class="logout-bar">
+      <button class="logout-btn" @click="logout">
+        <i class="fas fa-sign-out-alt"></i> 退出登录
+      </button>
+    </div>
+    <main class="main-content">
+      <div class="welcome-info">
+        <h2 class="welcome-title">欢迎回来，{{ username }}！</h2>
+        <span class="role-tag">听众视图</span>
+      </div>
+      <div class="user-info">
+        <div><b>用户名：</b>{{ username }}</div>
+      </div>
+      <div class="lecture-list">
+        <h3>可参与讲座</h3>
+        <div v-if="loading" style="color:#4361ee;">讲座加载中...</div>
+        <div v-if="error" style="color:red;">{{ error }}</div>
+        <div v-for="lecture in lectures" :key="lecture.id" class="lecture-card">
+          <div class="lecture-title">
+            讲座名称：
+            <router-link
+              :to="{ name: detailRouteName, params: { id: lecture.id } }"
+              class="lecture-link"
+            >
+              {{ lecture.title }}
+            </router-link>
           </div>
-        </div>
-        <div class="quiz-section">
-          <h3>参与测验</h3>
-          <div v-if="loading" style="color:#4361ee;">题目加载中...</div>
-          <div v-if="error" style="color:red;">{{ error }}</div>
-          <div v-for="quiz in quizzes" :key="quiz.id" class="quiz-item">
-            <div class="quiz-question">{{ quiz.questionText }}</div>
-            <ul class="quiz-options">
-              <li v-for="opt in quiz.options" :key="opt.optionLabel">
-                <label>
-                  <input type="radio" :name="'quiz-'+quiz.id" :value="opt.optionLabel" v-model="quiz.userAnswer" :disabled="quiz.answered">
-                  <b>{{ opt.optionLabel }}.</b> {{ opt.optionText }}
-                </label>
-              </li>
-            </ul>
-            <button class="btn btn-primary" @click="submitAnswer(quiz)" :disabled="quiz.answered || !quiz.userAnswer">提交答案</button>
-            <span v-if="quiz.answered">
-              <span v-if="quiz.userAnswer === quiz.correctOption" style="color:green;font-weight:bold;">答对了！</span>
-              <span v-else style="color:red;font-weight:bold;">答错了，正确答案：{{ quiz.correctOption }}</span>
-            </span>
-            <div class="quiz-feedback">
-              <input v-model="quiz.feedback" placeholder="对本题的反馈..." :disabled="quiz.answered" style="margin-right:8px;">
-              <button class="btn btn-secondary" @click="submitFeedback(quiz)" :disabled="quiz.answered || !quiz.feedback">提交反馈</button>
-            </div>
-            <div class="quiz-discussion">
-              <h4>讨论区</h4>
-              <ul>
-                <li v-for="d in quiz.discussions" :key="d.id">{{ d.content }}</li>
-              </ul>
-              <input v-model="quiz.newDiscussion" placeholder="发表评论..." style="margin-right:8px;">
-              <button class="btn btn-secondary" @click="submitDiscussion(quiz)">发送</button>
-            </div>
+          <div class="lecture-desc">
+            讲座描述：{{ lecture.description }}
           </div>
         </div>
       </div>
     </main>
-    <footer>
+    <footer class="footer-bar">
       <div class="footer-links">
         <a href="#">关于我们</a>
         <a href="#">隐私政策</a>
@@ -63,119 +56,199 @@
 <script>
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import Header from '@/components/Header.vue'
-import { getQuizzesByLecture, getQuizOptions, submitAnswer, submitFeedback, getDiscussionsByQuiz, submitDiscussion } from '@/api/index.js'
+import { getLectures, getLectureStats } from '@/router/index.js'
+import axios from 'axios'
 
 export default {
-  components: { Header },
   setup() {
-    const router = useRouter()
-    const username = ref('听众用户') // 实际应用中应从登录状态获取
-    const lectureId = ref(1) // 演示用，实际应从讲座管理获取
-    const quizzes = ref([])
+    const user = ref(JSON.parse(localStorage.getItem('user') || '{}'))
+    const username = ref(user.value.username || '')
+    const lectures = ref([])
     const loading = ref(false)
     const error = ref('')
+    const router = useRouter()
 
-    const logout = () => {
-      router.push({ name: 'home' })
-    }
-
-    const loadQuizzes = async () => {
+    const loadLectures = async () => {
       loading.value = true
       error.value = ''
       try {
-        const res = await getQuizzesByLecture(lectureId.value)
-        const quizArr = await Promise.all(res.data.map(async q => {
-          const optRes = await getQuizOptions(q.id)
-          const discRes = await getDiscussionsByQuiz(q.id)
+        const res = await getLectures()
+        const lectureArr = await Promise.all(res.data.data.map(async lec => {
+          const detailRes = await axios.get(`/lecture/${lec.id}/detail`)
+          const detail = detailRes.data.data
+          // 只保留讲座基本信息和题目统计
           return {
-            ...q,
-            options: optRes.data,
-            userAnswer: '',
-            answered: false,
-            feedback: '',
-            discussions: discRes.data || [],
-            newDiscussion: ''
+            ...detail.lecture,
+            quizzes: detail.quizzes.map(q => ({
+              questionText: q.quiz.questionText,
+              answerCount: q.answerCount,
+              correctRate: q.correctRate
+            }))
           }
         }))
-        quizzes.value = quizArr
+        lectures.value = lectureArr
       } catch (e) {
-        error.value = '题目加载失败，请重试'
+        error.value = '讲座加载失败，请重试'
       } finally {
         loading.value = false
       }
     }
-
-    const submitAnswerFn = async (quiz) => {
-      if (!quiz.userAnswer) return
-      try {
-        await submitAnswer({ quizId: quiz.id, userId: 1, chosenOption: quiz.userAnswer, isCorrect: quiz.userAnswer === quiz.correctOption })
-        quiz.answered = true
-      } catch (e) {
-        alert('提交答案失败')
-      }
+    onMounted(loadLectures)
+    const logout = () => {
+      localStorage.removeItem('user')
+      router.push({ name: 'auth' })
     }
-
-    const submitFeedbackFn = async (quiz) => {
-      if (!quiz.feedback) return
-      try {
-        await submitFeedback({ quizId: quiz.id, userId: 1, lectureId: lectureId.value, feedbackType: '题目反馈', comment: quiz.feedback })
-        quiz.feedback = ''
-        alert('反馈已提交')
-      } catch (e) {
-        alert('提交反馈失败')
-      }
-    }
-
-    const submitDiscussionFn = async (quiz) => {
-      if (!quiz.newDiscussion) return
-      try {
-        await submitDiscussion({ quizId: quiz.id, userId: 1, content: quiz.newDiscussion })
-        quiz.discussions.push({ content: quiz.newDiscussion })
-        quiz.newDiscussion = ''
-      } catch (e) {
-        alert('发送评论失败')
-      }
-    }
-
-    onMounted(loadQuizzes)
-
+    let detailRouteName = 'AudienceLectureDetail'
+    if (user.value.role === 'organizer') detailRouteName = 'OrganizerLectureDetail'
+    if (user.value.role === 'speaker') detailRouteName = 'SpeakerLectureDetail'
     return {
       username,
-      quizzes,
+      lectures,
       loading,
       error,
       logout,
-      submitAnswer: submitAnswerFn,
-      submitFeedback: submitFeedbackFn,
-      submitDiscussion: submitDiscussionFn
+      detailRouteName
     }
   }
 }
 </script>
 
 <style scoped>
-.quiz-section {
-  margin-top: 20px;
+.role-page-container {
+  min-height: 100vh;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
 }
-.quiz-item {
-  background: #f8f9fa;
+.header-bar {
+  background: #4361ee;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  height: 56px;
+}
+.brand {
+  font-size: 22px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+.nav-links {
+  display: flex;
+  gap: 24px;
+}
+.nav-link {
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+  transition: color 0.2s;
+}
+.nav-link:hover {
+  color: #ffd700;
+}
+.logout-bar {
+  background: #f6f8fa;
+  padding: 16px 32px 0 32px;
+}
+.logout-btn {
+  background: #fff;
+  color: #4361ee;
+  border: 1.5px solid #4361ee;
   border-radius: 8px;
-  padding: 16px;
+  padding: 8px 24px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.logout-btn:hover {
+  background: #4361ee;
+  color: #fff;
+}
+.main-content {
+  max-width: 800px;
+  margin: 32px auto 0 auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(67,97,238,0.08);
+  padding: 32px 24px 24px 24px;
+}
+.welcome-info {
   margin-bottom: 16px;
 }
-.quiz-question {
+.welcome-title {
+  font-size: 1.7rem;
   font-weight: bold;
-  margin-bottom: 8px;
-}
-.quiz-options {
-  list-style: none;
-  padding-left: 0;
-}
-.quiz-options li {
+  color: #222;
   margin-bottom: 4px;
 }
-.quiz-feedback, .quiz-discussion {
-  margin-top: 8px;
+.role-tag {
+  color: #4361ee;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+.user-info {
+  margin-bottom: 24px;
+}
+.lecture-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 32px 0;
+}
+.lecture-card {
+  background: #f4f7fe;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(67,97,238,0.08);
+  padding: 20px 28px 16px 28px;
+  transition: box-shadow 0.2s;
+}
+.lecture-card:hover {
+  box-shadow: 0 4px 24px rgba(67,97,238,0.16);
+}
+.lecture-title {
+  font-size: 1.15rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #222;
+}
+.lecture-link {
+  color: #4361ee;
+  text-decoration: underline;
+  margin-left: 6px;
+  transition: color 0.2s;
+}
+.lecture-link:hover {
+  color: #274bdb;
+}
+.lecture-desc {
+  color: #555;
+  font-size: 1rem;
+  margin-left: 2px;
+}
+.lecture-stats span {
+  margin-right: 24px;
+}
+.footer-bar {
+  margin-top: 40px;
+  background: #f6f8fa;
+  padding: 24px 0 8px 0;
+  text-align: center;
+}
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 8px;
+}
+.footer-links a {
+  color: #4361ee;
+  text-decoration: none;
+  font-size: 15px;
+  transition: color 0.2s;
+}
+.footer-links a:hover {
+  color: #ffd700;
 }
 </style> 

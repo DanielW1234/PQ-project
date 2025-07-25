@@ -6,6 +6,7 @@ import com.njust.springboot.service.FeedbackService;
 import org.springframework.stereotype.Service;
 import jakarta.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class FeedbackServiceImpl implements FeedbackService {
@@ -35,5 +36,10 @@ public class FeedbackServiceImpl implements FeedbackService {
     @Override
     public List<Feedback> getAllFeedbacks() {
         return feedbackMapper.selectAll();
+    }
+
+    @Override
+    public List<Map<String, Object>> countFeedbackByTypeAndComment(Long lectureId, String feedbackType) {
+        return feedbackMapper.countFeedbackByTypeAndComment(lectureId, feedbackType);
     }
 } 

@@ -9,4 +9,5 @@ public interface QuizOptionService {
     int updateQuizOption(QuizOption option);
     QuizOption getQuizOptionById(Long id);
     List<QuizOption> getAllQuizOptions();
+    List<QuizOption> getOptionsByQuizId(Long quizId);
 } 

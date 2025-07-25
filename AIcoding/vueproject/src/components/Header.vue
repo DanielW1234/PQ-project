@@ -5,16 +5,17 @@
     </div>
     <nav class="nav">
       <router-link to="/" class="nav-link">首页</router-link>
-      <router-link to="/auth" class="nav-link">登录/注册</router-link>
-      <router-link to="/organizer" class="nav-link">组织者</router-link>
-      <router-link to="/speaker" class="nav-link">演讲者</router-link>
-      <router-link to="/audience" class="nav-link">听众</router-link>
+      <router-link v-if="!role" to="/auth" class="nav-link">登录/注册</router-link>
+      <router-link v-if="role === 'audience'" to="/audience" class="nav-link">听众</router-link>
+      <router-link v-if="role === 'speaker'" to="/speaker" class="nav-link">演讲者</router-link>
+      <router-link v-if="role === 'organizer'" to="/organizer" class="nav-link">组织者</router-link>
     </nav>
   </header>
 </template>
 
 <script>
 import { useRouter } from 'vue-router'
+
 export default {
   name: 'Header',
   setup() {
@@ -22,7 +23,11 @@ export default {
     const goHome = () => {
       router.push({ name: 'home' })
     }
-    return { goHome }
+    // 获取当前登录用户
+    const user = JSON.parse(localStorage.getItem('user') || '{}')
+    // 角色判断
+    const role = user.role || ''
+    return { goHome, role }
   }
 }
 </script>

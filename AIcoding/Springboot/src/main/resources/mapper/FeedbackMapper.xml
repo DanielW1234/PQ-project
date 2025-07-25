@@ -33,4 +33,11 @@
     <select id="selectAll" resultMap="FeedbackResultMap">
         SELECT * FROM feedbacks
     </select>
+
+    <select id="countFeedbackByTypeAndComment" resultType="map">
+        SELECT comment, COUNT(*) as count
+        FROM feedbacks
+        WHERE lecture_id = #{lectureId} AND feedback_type = #{feedbackType}
+        GROUP BY comment
+    </select>
 </mapper> 

@@ -1,5 +1,4 @@
 package com.njust.springboot.controller;
-
 import com.njust.springboot.common.Result;
 import com.njust.springboot.service.UserService;
 import jakarta.annotation.Resource;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.njust.springboot.entity.User;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import java.util.Map;
+
 
 @RestController
 @RequestMapping("/user")

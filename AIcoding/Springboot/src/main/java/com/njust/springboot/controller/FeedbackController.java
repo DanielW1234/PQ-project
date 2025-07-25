@@ -6,6 +6,9 @@ import com.njust.springboot.service.FeedbackService;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/feedback")
 public class FeedbackController {
@@ -20,6 +23,16 @@ public class FeedbackController {
     @GetMapping("/{id}")
     public Result getById(@PathVariable Long id) {
         return Result.success(feedbackService.getFeedbackById(id));
+    }
+
+    @GetMapping("/stats/{lectureId}")
+    public Result getFeedbackStats(@PathVariable Long lectureId) {
+        Map<String, Object> stats = new HashMap<>();
+        String[] types = {"question_quality", "speech_quality", "speaker_level"};
+        for (String type : types) {
+            stats.put(type, feedbackService.countFeedbackByTypeAndComment(lectureId, type));
+        }
+        return Result.success(stats);
     }
 
     @PostMapping

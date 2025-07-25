@@ -1,0 +1,90 @@
+CREATE DATABASE popquiz;
+CREATE TABLE users (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  username VARCHAR(50) NOT NULL UNIQUE,
+  password VARCHAR(100) NOT NULL,
+  role VARCHAR(20) NOT NULL,
+  nickname VARCHAR(50),
+  is_anonymous TINYINT DEFAULT 0,
+  created_at DATETIME,
+  updated_at DATETIME
+);
+CREATE TABLE answers (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  user_id BIGINT,
+  quiz_id BIGINT,
+  chosen_option VARCHAR(100),
+  is_correct TINYINT,
+  is_answer TINYINT
+);
+CREATE TABLE attendance (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  user_id BIGINT,
+  lecture_id BIGINT,
+  joined_at DATETIME,
+  left_at DATETIME
+);
+CREATE TABLE discussions (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  quiz_id BIGINT,
+  user_id BIGINT,
+  parent_id BIGINT,
+  content TEXT,
+  created_at DATETIME
+);
+CREATE TABLE feedbacks (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  user_id BIGINT,
+  lecture_id BIGINT,
+  feedback_type VARCHAR(50),
+  comment TEXT,
+  created_at DATETIME
+);
+CREATE TABLE lectures (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  title VARCHAR(200),
+  description TEXT,
+  organizer_id BIGINT,
+  speaker_id BIGINT,
+  start_time DATETIME,
+  end_time DATETIME,
+  created_at DATETIME,
+  updated_at DATETIME,
+  password VARCHAR(100),
+  file_url VARCHAR(255)
+);
+CREATE TABLE lecture_content (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  lecture_id BIGINT,
+  content_type VARCHAR(50),
+  original_name VARCHAR(200),
+  storage_path VARCHAR(500),
+  processed_text TEXT,
+  uploaded_at DATETIME,
+  processed_at DATETIME,
+  is_download TINYINT,
+  file_length INT
+);
+CREATE TABLE quizzes (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  lecture_id BIGINT,
+  file_index INT,
+  question_text TEXT,
+  correct_option VARCHAR(100),
+  created_at DATETIME,
+  ai_paring DATETIME
+);
+CREATE TABLE quiz_gen_log (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  lecture_id BIGINT,
+  request_time DATETIME,
+  prompt TEXT,
+  response TEXT,
+  status VARCHAR(50)
+);
+CREATE TABLE quiz_options (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  quiz_id BIGINT,
+  option_label VARCHAR(20),
+  option_text VARCHAR(200)
+);

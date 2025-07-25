@@ -11,4 +11,5 @@ public interface QuizMapper {
     int update(Quiz quiz);
     Quiz selectById(Long id);
     List<Quiz> selectAll();
+    List<Quiz> selectByLectureId(Long lectureId);
 } 
